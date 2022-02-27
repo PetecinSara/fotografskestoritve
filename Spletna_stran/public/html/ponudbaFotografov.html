@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
+    <link rel="icon" type="image/png" href="../images/favicon-32x32.png">
+    <script src="../javascript/ponudbaFotografov.js"></script>
+    <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+    <title>Fotografi</title>
+
+</head>
+
+
+<body id="top" onload="naloziFotografe(); pageLoad(); naloziFiltriranje();">
+
+    <div class="bgded overlay" style="background-image:url('../images/fotografi.jpg'); background-position-y:-100px;">
+        <div class="wrapper row1">
+            <header id="header" class="hoc clear">
+                <div id="logo" class="fl_left">
+                    <h1><a href="index.html">PhotoUp <img src="../images/logo.png" alt="" style="height: 65px; width: 40px; padding-bottom: 22px;" ></a></h1>
+                </div>
+                <nav id="mainav" class="fl_right">
+                    <ul class="clear">
+                        <li class="active"><a href="ponudbaFotografov.html">Fotografi</a></li>
+                        <li class="active"><a href="blog.html">O nas</a></li>
+                        <li class="active"><a href="vprasanja.html">Vprašanja</a></li>
+                        <li>
+                            <a class="drop"><span id="prijavljeni">Prijavljeni kot: <span id="uporabnik"></span></span> <span class="fa-user fa-fw fas"></span></a>
+                            <ul>
+                                <li><a href="fotograf.html?id_fotografa=" id="profil">Moj profil</a></li>
+                                <li id="prijava"><a href="prijava.html">Prijava</a></li>
+                                <li id="registracija"><a href="registracija.html">Registracija</a></li>
+                                <li><a id="seznamNarocil" href="seznamNarocil.html">Seznam naročil</a></li>
+                                <li><a id="jePrijavljen" onclick="odjavi();">Odjava</a></li>
+                            </ul>
+                        </li>
+                        <li>
+
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+        <div id="breadcrumb" class="hoc clear">
+            <h6 class="heading">Fotografi</h6>
+
+        </div>
+    </div>
+
+    <div class="wrapper row3">
+        <main class="hoc container clear">
+            <div class="sidebar one_quarter first">
+                <h6><b>Filtriranje rezultatov:</b></h6>
+                <nav class="sdb_holder">
+                    <ul>
+                        <li>
+                            <a>
+                                <h1>Po iskalnem nizu</h1>
+                            </a>
+                            <ul>
+                                <input type="text" id="iskalni" class="form-control" onchange="noviIskalniNiz()">
+                            </ul>
+                        </li>
+                        <li>
+                            <a>
+                                <h1>Po lokaciji</h1>
+                            </a>
+                            <ul>
+                                <select onchange="filtiriranje();" name="seznamLokacija" id="seznamLokacija" class="form-control">
+                                </select>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>
+                                <h1>Po vrsti fotografiranja</h1>
+                            </a>
+                            <ul>
+                                <select onchange="filtiriranje();" name="seznamVrstaFotografiranja" id="seznamVrstaFotografiranja" class="form-control">
+                                </select>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="content three_quarter">
+                <table class="table" cellspacing="0" width="100%" id="customers" cellspacing="0" cellpadding="0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Lokacija</th>
+                            <th>Vrste fotografij</th>
+                            <th id="gumb">Več</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaFotografov">
+                    </tbody>
+                </table>
+                <script src="../javascript/ponudbaFotografov.js"></script>
+                <br />
+                <h1 class="center" style="display: none;" id="niZadetkov">Ni zadetkov</h1>
+            </div>
+
+            <div class="clear"></div>
+        </main>
+    </div>
+    <div class="wrapper row4">
+        <footer id="footer" class="hoc clear">
+            <div class="group btmspace-80">
+                <div id="ctdetails" class="clear">
+                    <ul class="nospace clear">
+                        <li class="one_quarter first">
+                            <div class="block clear">
+                                <p></p>
+                            </div>
+                        </li>
+                        <li class="one_quarter">
+                            <div class="block clear"><a href="#"><i class="fas fa-phone"></i></a> <span><strong>Pokličite nas:</strong> +00 (123) 456 7890</span></div>
+                        </li>
+                        <li class="one_quarter">
+                            <div class="block clear"><a href="#"><i class="fas fa-envelope"></i></a> <span><strong>Pošljite nam mail:</strong> ekipa2@photoup.si</span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="wrapper row5">
+        <div id="copyright" class="hoc clear">
+            <p class="center">Copyright &copy; 2021 - All Rights Reserved - <a href="#">PhotoUp</a></p>
+            <p class="center">
+                <ul class="faico clear center">
+                    <li><a class="faicon-facebook" href="#"><i class="fab fa-facebook"></i></a></li>
+                    <li><a class="faicon-google-plus" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                    <li><a class="faicon-dribble" href="#"><i class=" fab fa-github"></i></a></li>
+                    <li><a class="faicon-linkedin" href="#"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </p>
+        </div>
+
+        <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+        <script src="../layout/scripts/jquery.min.js"></script>
+        <script src="../layout/scripts/jquery.backtotop.js"></script>
+        <script src="../layout/scripts/jquery.mobilemenu.js"></script>
+</body>
+
+</html>
